@@ -25,7 +25,7 @@ class GithubApi extends Component {
 								loading: false,
 								username,
 								error: true,
-								message: 'No such user'
+								message: 'No such user - ' + username
 							}
 						else throw Error(response.status);
 					}
