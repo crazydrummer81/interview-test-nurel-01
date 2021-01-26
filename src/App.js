@@ -15,15 +15,13 @@ class GithubApi extends Component {
 		getData(username) {
 			const url = `https://api.github.com/users/${username}`
 			this.setState({loading: true})
+			
 			fetch(url)
 				.then(response => {
 					console.log(response);
 					if (response.status < 200 || response.status > 299) {
 						if (response.status === 404) 
 							return {
-								data: {},
-								loading: false,
-								username,
 								error: true,
 								message: 'No such user - ' + username
 							}
@@ -102,13 +100,11 @@ export default class App extends Component {
 				</button>
 				<GithubApi username={username}>
 					{({ name, followers, loading, error, message }) => (
-						<>
 							<div className="info">
 								{loading ? <Preloader/> : null}
 								{error ? message : 
 									`the user ${name || username} has ${followers} followers` }
 							</div>
-						</>
 					)}
 				</GithubApi>
 			</div>
